@@ -1,0 +1,8 @@
+#SPDX-License-Identifier: MIT-0
+---
+# handlers file for roles/web
+- name: Restart Nginx
+  ansible.builtin.docker_container:
+    name: nginx
+    state: restarted
+  become: true

@@ -1,0 +1,28 @@
+#SPDX-License-Identifier: MIT-0
+---
+
+- name: Setting the file directory
+  ansible.builtin.file:
+    path: /opt/application
+    state: directory
+    owner: "{{ ansible_user  }}"
+    group: "{{ ansible_user  }}"
+    mode: '0755'
+
+- name: Copy docker file
+  ansible.builtin.template:
+    src: Dockerfile.j2
+    dest: /opt/application/Dockerfile
+    owner: "{{ ansible_user  }}"
+    group: "{{ ansible_user  }}"
+    mode: '0644'
+
+- name: Build a docker image
+  ansible.builtin.docker_container: 
+    name: Application
+    image: "application: {{ application_app_version }}"
+    build:
+      path: /opt/application
+    state: present
+    ports: 5000:5000
+  notify: Restart application container

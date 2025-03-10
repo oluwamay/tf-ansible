@@ -1,0 +1,17 @@
+databases:
+  hosts:
+    db1:
+      ansible_host: 34.237.141.33
+      ansible_user: ubuntu
+
+
+applications:
+  hosts:
+    app0:
+      ansible_host: 44.193.198.58
+
+web:
+  hosts:
+    web0:
+      ansible_host:  100.24.105.50
+    

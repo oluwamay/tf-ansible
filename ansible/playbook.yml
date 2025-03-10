@@ -1,0 +1,44 @@
+# - name: Update APT cache
+#   hosts: all
+#   become: true
+#   gather_facts: true
+#   roles:
+#     - roles/common
+
+# - name: Install python 3
+#   hosts: aws_application
+#   become: true
+#   gather_facts: true
+#   roles:
+#     - roles/application
+
+# - name: Setup Web server
+#   hosts: aws_web
+#   become: true
+#   gather_facts: true
+#   roles:
+#     - web
+
+
+- name: Set-up three tier applications
+  hosts: all
+  become: true
+  roles:
+    - common
+    - { role: web, when: "'aws_web' in group_names" }
+    - { role: application, when: "'aws_application' in group_names" }
+    - { role: database, when: "'aws_database' in group_names" }
+
+- name: Gather facts
+  hosts: all
+  tasks:
+    - name: Print OS info
+      debug: "OS Information: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    
+    - name: Print installed docker version
+      shell: docker --version
+      register: docker_version
+    
+    - name: Print group group_names"
+      debug:
+        var: group_names

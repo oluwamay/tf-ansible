@@ -1,0 +1,9 @@
+.ssh
+.envrc
+.terraform
+*.tfstate
+*.tfvars
+.terraform.lock.hcl
+terraform.log
+*/tf-ans/*
+
