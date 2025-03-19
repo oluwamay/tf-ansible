@@ -209,18 +209,18 @@ pipeline {
         // }
     }
     
-    post {
-        always {
-            // Clean up local Docker images
-            sh '''
-            docker rmi ${API_IMAGE}:${VERSION} ${API_IMAGE}:latest || true
-            docker rmi ${PROCESSOR_IMAGE}:${VERSION} ${PROCESSOR_IMAGE}:latest || true
-            docker rmi ${FRONTEND_IMAGE}:${VERSION} ${FRONTEND_IMAGE}:latest || true
-            '''
+    // post {
+    //     always {
+    //         // Clean up local Docker images
+    //         sh '''
+    //         docker rmi ${API_IMAGE}:${VERSION} ${API_IMAGE}:latest || true
+    //         docker rmi ${PROCESSOR_IMAGE}:${VERSION} ${PROCESSOR_IMAGE}:latest || true
+    //         docker rmi ${FRONTEND_IMAGE}:${VERSION} ${FRONTEND_IMAGE}:latest || true
+    //         '''
             
-            // Logout from DockerHub
-            sh 'docker logout'
-        }
+    //         // Logout from DockerHub
+    //         sh 'docker logout'
+    //     }
         
         // success {
         //     echo 'Pipeline completed successfully!'
