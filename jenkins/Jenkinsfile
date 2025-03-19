@@ -1,9 +1,6 @@
 pipeline{
     agent any
     
-    triggers{
-        cron('*/2 * * * *')
-    }
     
     environment {
         DEPLOYMENT_ENV = 'testing'
